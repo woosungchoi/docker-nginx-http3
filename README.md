@@ -1,6 +1,6 @@
 # docker-nginx-http3
 
-Alpine Linux (`edge`) image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge.
+Alpine Linuxe image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge.
 
 HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
@@ -10,12 +10,13 @@ Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeepp
 
 ## Features
 
-- HTTP/3 (QUIC)
+- HTTP/3 (QUIC) via CloudFlare's quiche
+- HTTP/2 (with Server Push)
 - HTTP/2
-- HTTP/2 Server Push
 - BoringSSL (Google's flavor of OpenSSL)
 - TLS 1.3 **with 0-RTT support**
 - Brotli compression
+- [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
 
 ## HTTP/3 ENABLED!
 
@@ -28,12 +29,12 @@ Using Chrome Canary with the following CLI flags:
 Run on Mac OS (**darwin**):
 
 ```bash
-   "/Applications/Google Chrome Canary.app Contents/MacOS/Google Chrome Canary" \
-     --flag-switches-begin \
-     --enable-quic \
-     --quic-version=h3-23 \
-     --enable-features=EnableTLS13EarlyData \
-     --flag-switches-end
+"/Applications/Google Chrome Canary.app Contents/MacOS/Google Chrome Canary" \
+  --flag-switches-begin \
+  --enable-quic \
+  --quic-version=h3-23 \
+  --enable-features=EnableTLS13EarlyData \
+  --flag-switches-end
 ```
 
 ### HTTP/3 (QUIC) Proof
@@ -46,7 +47,7 @@ Since HTTP/3 is experimental, we have to be sensible with it. Therefore, below i
 
 ![alt](https://user-images.githubusercontent.com/7084995/67162942-654ff300-f337-11e9-9dc0-6d7a915d517c.png)
 
-## TLS v1.3 0-RTT
+## TLS v1.3 0-RTT Proof
 
 ![tls-0-rtt](https://user-images.githubusercontent.com/7084995/67163692-08a50600-f340-11e9-830c-c8a11c824a1f.png)
 
