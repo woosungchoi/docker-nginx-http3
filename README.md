@@ -1,5 +1,10 @@
 # docker-nginx-http3
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ranadeeppolavarapu/nginx-http3)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
+[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
+![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
+
 Alpine Linuxe image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge.
 
 HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
@@ -17,6 +22,12 @@ Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeepp
 - TLS 1.3 **with 0-RTT support**
 - Brotli compression
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
+
+## Future Additions
+
+Possible additions in the future pending IETF spec approvals.
+
+- [Facebook's zstd over the web](https://tools.ietf.org/html/rfc8478)
 
 ## HTTP/3 ENABLED!
 
