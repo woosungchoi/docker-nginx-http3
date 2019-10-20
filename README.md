@@ -27,14 +27,14 @@ Using Chrome Canary with the following CLI flags:
 
 Run on Mac OS (**darwin**):
 
-- ```bash
+```bash
    "/Applications/Google Chrome Canary.app Contents/MacOS/Google Chrome Canary" \
      --flag-switches-begin \
      --enable-quic \
      --quic-version=h3-23 \
      --enable-features=EnableTLS13EarlyData \
      --flag-switches-end
-  ```
+```
 
 ### HTTP/3 (QUIC) Proof
 
