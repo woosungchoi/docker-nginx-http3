@@ -6,7 +6,7 @@
 FROM alpine:edge
 
 ENV NGINX_VERSION 1.16.1
-ENV NGX_BROTLI_COMMIT bfd2885b2da4d763fed18f49216bb935223cd34b
+ENV NGX_BROTLI_COMMIT e505dce68acc190cc5a1e780a3b0275e39f160ca
 
 # Point to Alpine Linux edge branch.
 RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
