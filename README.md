@@ -4,6 +4,7 @@
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ranadeeppolavarapu/nginx-http3)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 [![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
 
 Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge. Built on the edge, for the edge.
 
@@ -12,6 +13,10 @@ HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare
 Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
 
 `docker pull ranadeeppolavarapu/nginx-http3`
+
+## Contributing
+
+Contributions are welcome. Please feel free to contribute 😊.
 
 ## Features
 
@@ -22,6 +27,7 @@ Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeepp
 - TLS 1.3 **with 0-RTT support**
 - Brotli compression
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
+- Alpine Linux (total size of **51 MB** compressed)
 
 ## Future Additions
 
