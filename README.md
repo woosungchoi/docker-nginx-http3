@@ -5,7 +5,7 @@
 [![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 
-Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge.
+Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge. Built on the edge, for the edge.
 
 HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
