@@ -3,7 +3,7 @@
 # modules.
 ##################################################
 
-FROM alpine:latest
+FROM alpine:edge
 
 ENV NGINX_VERSION 1.16.1
 ENV NGX_BROTLI_COMMIT e505dce68acc190cc5a1e780a3b0275e39f160ca
