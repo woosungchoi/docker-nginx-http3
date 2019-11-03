@@ -27,7 +27,7 @@ Contributions are welcome. Please feel free to contribute 😊.
 - TLS 1.3 **with 0-RTT support**
 - Brotli compression
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
-- Alpine Linux (total size of **51 MB** compressed)
+- Alpine Linux (total size of **9 MB** compressed)
 
 ## Future Additions
 

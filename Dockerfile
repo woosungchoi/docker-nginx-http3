@@ -3,15 +3,10 @@
 # modules.
 ##################################################
 
-FROM alpine:edge
+FROM alpine:edge AS builder
 
 ENV NGINX_VERSION 1.16.1
 ENV NGX_BROTLI_COMMIT e505dce68acc190cc5a1e780a3b0275e39f160ca
-
-# Point to Alpine Linux edge branch.
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories \
-  && echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-  && echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
@@ -171,14 +166,42 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && apk del .build-deps \
   && apk del .brotli-build-deps \
   && apk del .gettext \
-  && mv /tmp/envsubst /usr/local/bin/ \
-  \
+  && mv /tmp/envsubst /usr/local/bin/
+
+# Create self-signed certificate
+RUN apk add openssl \
+  && openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/localhost.key -out /etc/ssl/localhost.pem -days 365 -sha256 -subj '/CN=localhost'
+
+FROM alpine:latest
+
+COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx-debug /usr/sbin/
+COPY --from=builder /usr/lib/nginx /usr/lib/
+COPY --from=builder /usr/share/nginx/html/* /usr/share/nginx/html/
+COPY --from=builder /etc/nginx/* /etc/nginx/
+COPY --from=builder /usr/local/bin/envsubst /usr/local/bin/
+COPY --from=builder /etc/ssl/private/localhost.key /etc/ssl/private/
+COPY --from=builder /etc/ssl/localhost.pem /etc/ssl/
+
+RUN \
   # Bring in tzdata so users could set the timezones through the environment
   # variables
-  && apk add --no-cache tzdata \
+  apk add --no-cache tzdata \
   \
+  && apk add --no-cache \
+  pcre \
+  libgcc \
+  && addgroup -S nginx \
+  && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
   # forward request and error logs to docker log collector
+  && mkdir -p /var/log/nginx \
+  && touch /var/log/nginx/access.log /var/log/nginx/error.log \
+  && chown nginx: /var/log/nginx/access.log /var/log/nginx/error.log \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
+
+COPY nginx.conf /etc/nginx/
+COPY h3.nginxconf /etc/nginx/conf.d/
+
+STOPSIGNAL SIGTERM
 
 CMD ["nginx", "-g", "daemon off;"]

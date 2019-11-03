@@ -1,0 +1,32 @@
+# use the latest ubuntu environment (18.04) available on travis
+dist: bionic
+
+language: go
+
+go:
+  - stable
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get -y install libssl-dev
+
+install:
+  - docker build -t nginx-http3 .
+  - >-
+    docker run --name nginx-http3 \
+      -d \
+      -p 80:80 \
+      -p 443:443/tcp \
+      -p 443:443/udp \
+      ranadeeppolavarapu/nginx-http3:nightly
+
+script:
+  - docker ps | grep -q nginx-http3
+  - host=domain.example.com # Replace your domain.
+  - >-
+    echo -e "GET / HTTP/1.1\r\nHost: $host\r\nConnection: close\r\n\r\n" > request.txt && \
+    openssl s_client -connect $host:443 -tls1_3 -sess_out session.pem -ign_eof < request.txt && \
+    openssl s_client -connect $host:443 -tls1_3 -sess_in session.pem -early_data request.txt | grep -q 'Early data was accepted'
+  - curl -v -k https://localhost:443
