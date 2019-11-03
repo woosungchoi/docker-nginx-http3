@@ -14,6 +14,27 @@ Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeepp
 
 `docker pull ranadeeppolavarapu/nginx-http3`
 
+## Usage
+
+This is a base image like the default _nginx_ image. It is meant to be used as a drop-in replacement for the nginx base image.
+
+Best practice example Nginx configs are available in this repo. See [_nginx.conf_](nginx.conf) and [_h3.nginx.conf_](h3.nginx.conf).
+
+Example:
+
+```Dockerfile
+# Base Nginx HTTP/3 Image
+FROM ranadeeppolavarapu/nginx-http3:latest
+
+# Copy your certs.
+COPY localhost.key /etc/ssl/private/
+COPY localhost.pem /etc/ssl/
+
+# Copy your configs.
+COPY nginx.conf /etc/nginx/
+COPY h3.nginx.conf /etc/nginx/conf.d/
+```
+
 ## Contributing
 
 Contributions are welcome. Please feel free to contribute 😊.

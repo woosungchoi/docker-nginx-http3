@@ -199,8 +199,9 @@ RUN \
   && ln -sf /dev/stdout /var/log/nginx/access.log \
   && ln -sf /dev/stderr /var/log/nginx/error.log
 
-COPY nginx.conf /etc/nginx/
-COPY h3.nginxconf /etc/nginx/conf.d/
+# Recommended nginx configuration. Please copy the config you wish to use.
+# COPY nginx.conf /etc/nginx/
+# COPY h3.nginx.conf /etc/nginx/conf.d/
 
 STOPSIGNAL SIGTERM
 
