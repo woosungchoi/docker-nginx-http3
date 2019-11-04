@@ -35,6 +35,10 @@ COPY nginx.conf /etc/nginx/
 COPY h3.nginx.conf /etc/nginx/conf.d/
 ```
 
+H3 runs over UDP so, you will need to port map both TCP and UDP. Ex: `docker run -p 80:80 -p 443:443/tcp -p 443:443/udp ...`
+
+**NOTE**: Please note that you need a valid [CA](https://en.wikipedia.org/wiki/Certificate_authority) signed certificate for the client to upgrade you to HTTP/3. [Let's Encrypt](https://letsencrypt.org/) is a option for getting a free valid CA signed certificate.
+
 ## Contributing
 
 Contributions are welcome. Please feel free to contribute 😊.
@@ -74,6 +78,10 @@ Run on Mac OS (**darwin**):
   --enable-features=EnableTLS13EarlyData \
   --flag-switches-end
 ```
+
+Windows:
+
+![Windows Chrome Canary](https://user-images.githubusercontent.com/13495525/68124347-21b9d380-ff4a-11e9-9963-e1102762c466.JPG)
 
 ### HTTP/3 (QUIC) Proof
 
