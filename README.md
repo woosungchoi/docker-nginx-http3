@@ -3,6 +3,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ranadeeppolavarapu/nginx-http3)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 [![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
+[![MicroBadger](https://images.microbadger.com/badges/image/ranadeeppolavarapu/nginx-http3.svg)](https://microbadger.com/images/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
 
