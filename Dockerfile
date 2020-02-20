@@ -57,7 +57,6 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   --with-http_v3_module \
   --with-openssl=/usr/src/quiche/deps/boringssl \
   --with-quiche=/usr/src/quiche \
-  --with-ipv6 \
   --add-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
   --with-cc-opt=-Wno-error \
