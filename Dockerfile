@@ -90,12 +90,12 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   cargo \
   && mkdir -p /usr/src \
   && cd /usr/src \
-  && git clone --recursive https://github.com/google/ngx_brotli.git \
+  && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli.git \
   && cd ngx_brotli \
   && git checkout -b $NGX_BROTLI_COMMIT \
   && cd .. \
-  && git clone --recursive https://github.com/openresty/headers-more-nginx-module.git \
-  && git clone --recursive https://github.com/cloudflare/quiche \
+  && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module.git \
+  && git clone --depth=1 --recursive https://github.com/cloudflare/quiche \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
   && export GNUPGHOME="$(mktemp -d)" \
