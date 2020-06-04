@@ -5,6 +5,8 @@
 
 FROM alpine:edge AS builder
 
+LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
+
 ENV NGINX_VERSION 1.16.1
 ENV NGX_BROTLI_COMMIT 25f86f0bac1101b6512135eac5f93c49c63609e3
 
@@ -59,6 +61,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   --with-quiche=/usr/src/quiche \
   --add-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
+  --add-module=/usr/src/njs/nginx \
   --with-cc-opt=-Wno-error \
   " \
   && addgroup -S nginx \
@@ -95,6 +98,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && git checkout -b $NGX_BROTLI_COMMIT \
   && cd .. \
   && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module.git \
+  && git clone --depth=1 --recursive https://github.com/nginx/njs \
   && git clone --depth=1 --recursive https://github.com/cloudflare/quiche \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
@@ -145,6 +149,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && rm -rf /usr/src/nginx-$NGINX_VERSION \
   && rm -rf /usr/src/ngx_brotli \
   && rm -rf /usr/src/headers-more-nginx-module \
+  && rm -rf /usr/src/njs \
   && rm -rf /usr/src/quiche \
   \
   # Bring in gettext so we can get `envsubst`, then throw
