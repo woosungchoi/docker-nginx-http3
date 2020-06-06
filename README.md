@@ -7,7 +7,7 @@
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
-Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli support. All built on the bleeding edge. Built on the edge, for the edge.
+Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli, NJS support. All built on the bleeding edge. Built on the edge, for the edge.
 
 HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
@@ -53,6 +53,7 @@ Contributions are welcome. Please feel free to contribute 😊.
 - TLS 1.3 **with 0-RTT support**
 - Brotli compression
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
+- [NJS](https://www.nginx.com/blog/introduction-nginscript/)
 - Alpine Linux (total size of **9 MB** compressed)
 
 ## Future Additions
