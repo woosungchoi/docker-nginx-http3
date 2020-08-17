@@ -209,6 +209,7 @@ RUN \
   && apk add --no-cache \
   pcre \
   libgcc \
+  libintl \
   && addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
   # forward request and error logs to docker log collector
