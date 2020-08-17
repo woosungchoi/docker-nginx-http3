@@ -55,7 +55,7 @@ Contributions are welcome. Please feel free to contribute 😊.
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
 - [NJS](https://www.nginx.com/blog/introduction-nginscript/)
 - [nginx_cookie_flag_module](https://www.nginx.com/products/nginx/modules/cookie-flag/)
-- Alpine Linux (total size of **9 MB** compressed)
+- Alpine Linux (total size of **10 MB** compressed)
 
 ## Future Additions
 
