@@ -9,6 +9,8 @@ LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.c
 
 ENV NGINX_VERSION 1.16.1
 ENV NGX_BROTLI_COMMIT 25f86f0bac1101b6512135eac5f93c49c63609e3
+ENV PCRE_VERSION 8.44
+ENV ZLIB_VERSION 1.2.11
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
@@ -27,6 +29,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
   --user=nginx \
   --group=nginx \
+  --with-pcre=/usr/src/pcre-${PCRE_VERSION} \
+  --with-pcre-jit \
+  --with-zlib=/usr/src/zlib-${ZLIB_VERSION} \
   --with-http_ssl_module \
   --with-http_realip_module \
   --with-http_addition_module \
@@ -67,6 +72,10 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   " \
   && addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
+  && apk update \
+  && apk upgrade \
+  && apk add --no-cache ca-certificates \
+  && update-ca-certificates \
   && apk add --no-cache --virtual .build-deps \
   gcc \
   libc-dev \
@@ -95,11 +104,13 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   patch \
   && mkdir -p /usr/src \
   && cd /usr/src \
-  && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli.git \
+  && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli \
   && cd ngx_brotli \
   && git checkout -b $NGX_BROTLI_COMMIT \
   && cd .. \
-  && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module.git \
+  && wget -qO- https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.tar.gz | tar zxvf - \
+  && wget -qO- http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
+  && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module \
   && git clone --depth=1 --recursive https://github.com/nginx/njs \
   && git clone --depth=1 --recursive https://github.com/AirisX/nginx_cookie_flag_module \
   && git clone --depth=1 --recursive https://github.com/cloudflare/quiche \
@@ -124,7 +135,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && rm nginx.tar.gz \
   && cd /usr/src/nginx-$NGINX_VERSION \
   && patch -p01 < /usr/src/quiche/extras/nginx/nginx-1.16.patch \
-  && ./configure $CONFIG --with-debug --build="quiche-$(git --git-dir=/usr/src/quiche/.git rev-parse --short HEAD) ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
+  && ./configure $CONFIG --with-debug --build="pcre-${PCRE_VERSION} zlib-${ZLIB_VERSION} quiche-$(git --git-dir=/usr/src/quiche/.git rev-parse --short HEAD) ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && mv objs/nginx objs/nginx-debug \
   && mv objs/ngx_http_xslt_filter_module.so objs/ngx_http_xslt_filter_module-debug.so \
@@ -132,7 +143,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
   && mv objs/ngx_http_perl_module.so objs/ngx_http_perl_module-debug.so \
   && mv objs/ngx_stream_geoip_module.so objs/ngx_stream_geoip_module-debug.so \
-  && ./configure $CONFIG --build="quiche-$(git --git-dir=/usr/src/quiche/.git rev-parse --short HEAD) ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
+  && ./configure $CONFIG --build="pcre-${PCRE_VERSION} zlib-${ZLIB_VERSION} quiche-$(git --git-dir=/usr/src/quiche/.git rev-parse --short HEAD) ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && make install \
   && rm -rf /etc/nginx/html/ \
