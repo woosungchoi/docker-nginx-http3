@@ -13,7 +13,9 @@ HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare
 
 Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
 
-`docker pull ranadeeppolavarapu/nginx-http3`
+**Latest** (*nginx* `1.16.1`): `docker pull ranadeeppolavarapu/nginx-http3`
+
+**Edge** (*nginx* `1.19.2`): `docker pull ranadeeppolavarapu/nginx-http3:edge`
 
 ## Usage
 
