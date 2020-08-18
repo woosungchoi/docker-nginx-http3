@@ -57,6 +57,8 @@ Contributions are welcome. Please feel free to contribute 😊.
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
 - [NJS](https://www.nginx.com/blog/introduction-nginscript/)
 - [nginx_cookie_flag_module](https://www.nginx.com/products/nginx/modules/cookie-flag/)
+- PCRE latest with [JIT compilation](http://nginx.org/en/docs/ngx_core_module.html#pcre_jit)  enabled
+- zlib latest
 - Alpine Linux (total size of **10 MB** compressed)
 
 ## Future Additions
