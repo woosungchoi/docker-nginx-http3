@@ -7,15 +7,13 @@
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
-Alpine Linux image with nginx with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the edge, for the edge.
+Alpine Linux image with nginx `1.19.2` (mainline) with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the edge, for the edge.
 
 HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
 Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
 
-**Latest** (*nginx* `1.16.1`): `docker pull ranadeeppolavarapu/nginx-http3`
-
-**Edge** (*nginx* `1.19.2`): `docker pull ranadeeppolavarapu/nginx-http3:edge`
+**Latest**: `docker pull ranadeeppolavarapu/nginx-http3`
 
 ## Usage
 
