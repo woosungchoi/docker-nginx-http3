@@ -7,7 +7,7 @@ FROM alpine:edge AS builder
 
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
-ENV NGINX_VERSION 1.16.1
+ENV NGINX_VERSION 1.19.2
 ENV NGX_BROTLI_COMMIT 25f86f0bac1101b6512135eac5f93c49c63609e3
 ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
