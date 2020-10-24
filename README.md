@@ -70,7 +70,7 @@ Possible additions in the future pending IETF spec approvals.
 Using Chrome Canary with the following CLI flags:
 
 ```bash
---flag-switches-begin --enable-quic --quic-version=h3-28 --enable-features=EnableTLS13EarlyData --flag-switches-end
+--flag-switches-begin --enable-quic --quic-version=h3-29 --enable-features=EnableTLS13EarlyData --flag-switches-end
 ```
 
 Run on Mac OS (**darwin**):
@@ -79,7 +79,7 @@ Run on Mac OS (**darwin**):
 "/Applications/Google Chrome Canary.app Contents/MacOS/Google Chrome Canary" \
   --flag-switches-begin \
   --enable-quic \
-  --quic-version=h3-23 \
+  --quic-version=h3-29 \
   --enable-features=EnableTLS13EarlyData \
   --flag-switches-end
 ```
