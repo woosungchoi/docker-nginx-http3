@@ -11,6 +11,7 @@ ENV NGINX_VERSION 1.19.5
 ENV NGX_BROTLI_COMMIT 9aec15e2aa6feea2113119ba06460af70ab3ea62
 ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
+ENV QUICHE_COMMIT 6c1e5b4
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
@@ -114,6 +115,9 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && git clone --depth=1 --recursive https://github.com/nginx/njs \
   && git clone --depth=1 --recursive https://github.com/AirisX/nginx_cookie_flag_module \
   && git clone --depth=1 --recursive https://github.com/cloudflare/quiche \
+  && cd quiche \
+  && git checkout -b $QUICHE_COMMIT \
+  && cd .. \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
   && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
   && export GNUPGHOME="$(mktemp -d)" \
