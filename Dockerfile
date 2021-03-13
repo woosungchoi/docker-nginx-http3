@@ -13,7 +13,7 @@ ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
 ENV QUICHE_COMMIT 6c1e5b4
 
-RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
+RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
@@ -78,6 +78,7 @@ RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && apk add --no-cache ca-certificates \
   && update-ca-certificates \
   && apk add --no-cache --virtual .build-deps \
+  sudo \
   gcc \
   libc-dev \
   make \
