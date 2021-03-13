@@ -78,7 +78,6 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && apk add --no-cache ca-certificates \
   && update-ca-certificates \
   && apk add --no-cache --virtual .build-deps \
-  sudo \
   gcc \
   libc-dev \
   make \
@@ -114,13 +113,13 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && cd pcre-${PCRE_VERSION} \
   && ./configure \
   && make \
-  && sudo make install \
+  && make install \
   && cd .. \
   && wget -qO- http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
   && cd zlib-${ZLIB_VERSION} \
   && ./configure \
   && make \
-  && sudo make install \
+  && make install \
   && cd .. \
   && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module \
   && git clone --depth=1 --recursive https://github.com/nginx/njs \
