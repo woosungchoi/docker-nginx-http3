@@ -3,7 +3,7 @@
 # modules.
 ##################################################
 
-FROM alpine:latest AS builder
+FROM alpine:edge AS builder
 
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
@@ -11,7 +11,7 @@ ENV NGINX_VERSION 1.19.5
 ENV NGX_BROTLI_COMMIT 9aec15e2aa6feea2113119ba06460af70ab3ea62
 ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
-ENV QUICHE_COMMIT 5092e4d1e8ae2773a56eddda6a8205f5e65b4b37
+ENV QUICHE_COMMIT 6d070ed8694216806f3ce689d71ceb7ad76d425e
 
 RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && CONFIG="\
