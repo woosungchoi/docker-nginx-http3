@@ -1,25 +1,30 @@
 # docker-nginx-http3
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/ranadeeppolavarapu/nginx-http3)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 [![MicroBadger](https://images.microbadger.com/badges/image/ranadeeppolavarapu/nginx-http3.svg)](https://microbadger.com/images/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
-Alpine Linux image with nginx `1.19.5` (mainline) with HTTP/3 (QUIC), TLSv1.3, 0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the edge, for the edge.
+Alpine Linux image with nginx `1.19.10` (mainline) with HTTP/3 (QUIC), TLSv1.3,
+0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built
+on the edge, for the edge.
 
-HTTP/3 support provided from the smart people at [CloudFlare](https://cloudflare.com) with the [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
+HTTP/3 support provided from the smart people at
+[CloudFlare](https://cloudflare.com) with the
+[cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
-Images for this are available on [Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
+Images for this are available on
+[Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
 
 **Latest**: `docker pull ranadeeppolavarapu/nginx-http3`
 
 ## Usage
 
-This is a base image like the default _nginx_ image. It is meant to be used as a drop-in replacement for the nginx base image.
+This is a base image like the default _nginx_ image. It is meant to be used as a
+drop-in replacement for the nginx base image.
 
-Best practice example Nginx configs are available in this repo. See [_nginx.conf_](nginx.conf) and [_h3.nginx.conf_](h3.nginx.conf).
+Best practice example Nginx configs are available in this repo. See
+[_nginx.conf_](nginx.conf) and [_h3.nginx.conf_](h3.nginx.conf).
 
 Example:
 
@@ -36,9 +41,13 @@ COPY nginx.conf /etc/nginx/
 COPY h3.nginx.conf /etc/nginx/conf.d/
 ```
 
-H3 runs over UDP so, you will need to port map both TCP and UDP. Ex: `docker run -p 80:80 -p 443:443/tcp -p 443:443/udp ...`
+H3 runs over UDP so, you will need to port map both TCP and UDP. Ex:
+`docker run -p 80:80 -p 443:443/tcp -p 443:443/udp ...`
 
-**NOTE**: Please note that you need a valid [CA](https://en.wikipedia.org/wiki/Certificate_authority) signed certificate for the client to upgrade you to HTTP/3. [Let's Encrypt](https://letsencrypt.org/) is a option for getting a free valid CA signed certificate.
+**NOTE**: Please note that you need a valid
+[CA](https://en.wikipedia.org/wiki/Certificate_authority) signed certificate for
+the client to upgrade you to HTTP/3. [Let's Encrypt](https://letsencrypt.org/)
+is a option for getting a free valid CA signed certificate.
 
 ## Contributing
 
@@ -55,7 +64,9 @@ Contributions are welcome. Please feel free to contribute 😊.
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
 - [NJS](https://www.nginx.com/blog/introduction-nginscript/)
 - [nginx_cookie_flag_module](https://www.nginx.com/products/nginx/modules/cookie-flag/)
-- PCRE latest with [JIT compilation](http://nginx.org/en/docs/ngx_core_module.html#pcre_jit)  enabled
+- PCRE latest with
+  [JIT compilation](http://nginx.org/en/docs/ngx_core_module.html#pcre_jit)
+  enabled
 - zlib latest
 - Alpine Linux (total size of **10 MB** compressed)
 
@@ -90,7 +101,8 @@ Windows:
 
 ### HTTP/3 (QUIC) Proof
 
-Since HTTP/3 is experimental, we have to be sensible with it. Therefore, below is HTTP/3 in production on one of my web apps 🙃.
+Since HTTP/3 is experimental, we have to be sensible with it. Therefore, below
+is HTTP/3 in production on one of my web apps 🙃.
 
 ![h3](https://user-images.githubusercontent.com/7084995/67162952-831d5800-f337-11e9-9297-05241a693cc4.png)
 
