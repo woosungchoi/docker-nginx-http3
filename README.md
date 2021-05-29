@@ -5,7 +5,7 @@
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)
 
-Alpine Linux image with nginx `1.19.10` (mainline) with HTTP/3 (QUIC), TLSv1.3,
+Alpine Linux image with nginx `1.19.5` (mainline) with HTTP/3 (QUIC), TLSv1.3,
 0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built
 on the edge, for the edge.
 
