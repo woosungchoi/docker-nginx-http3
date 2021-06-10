@@ -35,5 +35,5 @@ jobs:
             --build-arg BUILD_DATE=${BUILD_DATE} \
             --build-arg VCS_REF=${VCS_REF} \
             --tag ranadeeppolavarapu/nginx-http3:latest \
-            --platform linux/amd64,linux/arm64,linux/arm/v8,linux/arm/v7 \
+            --platform linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7 \
             --output "type=image,push=true" .
