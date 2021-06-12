@@ -8,9 +8,9 @@
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm64-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv7-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)
 
-Alpine Linux image with nginx `1.19.5` (mainline) with HTTP/3 (QUIC), TLSv1.3,
-0-RTT, brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built
-on the edge, for the edge.
+Alpine Linux image with nginx `1.16.1` with HTTP/3 (QUIC), TLSv1.3, 0-RTT,
+brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the
+edge, for the edge.
 
 HTTP/3 support provided from the smart people at
 [CloudFlare](https://cloudflare.com) with the
