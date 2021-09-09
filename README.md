@@ -1,13 +1,12 @@
 # docker-nginx-http3
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
-[![MicroBadger](https://images.microbadger.com/badges/image/ranadeeppolavarapu/nginx-http3.svg)](https://microbadger.com/images/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md)  
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Famd64-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)  
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm64-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)  
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv7-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)  
-[![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv6-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)  
+[![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv6-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)
 
 Alpine Linux image with nginx `1.16.1` with HTTP/3 (QUIC), TLSv1.3, 0-RTT,
 brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the
@@ -18,11 +17,15 @@ HTTP/3 support provided from the smart people at
 [cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
 Images for this are available on
-[Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3).
-
-**Latest**: `docker pull ranadeeppolavarapu/nginx-http3`
+[Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3) and
+[GHCR](https://github.com/RanadeepPolavarapu/docker-nginx-http3/pkgs/container/nginx-http3).
 
 ## Usage
+
+**Docker Hub:** `docker pull ranadeeppolavarapu/nginx-http3`
+
+**GitHub Container Registry (GHCR):**
+`docker pull ghcr.io/ranadeeppolavarapu/nginx-http3`
 
 This is a base image like the default _nginx_ image. It is meant to be used as a
 drop-in replacement for the nginx base image.

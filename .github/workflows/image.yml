@@ -58,11 +58,9 @@ jobs:
             ${{ env.DOCKER_IMG }}:latest
             ${{ env.DOCKER_IMG }}:${{ env.GIT_REF }}
             ${{ env.DOCKER_IMG }}:${{ env.GIT_SHA }}
-            ${{ env.DOCKER_IMG }}:${{ env.BUILD_VER }}
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ env.GIT_REF }}
             ${{ env.IMAGE }}:${{ env.GIT_SHA }}
-            ${{ env.IMAGE }}:${{ env.BUILD_VER }}
           build-args: |
             BUILD_DATE=${{ env.BUILD_DATE }}
             VCS_REF=${{ env.VCS_REF }}
