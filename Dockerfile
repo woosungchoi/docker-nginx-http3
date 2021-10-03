@@ -85,7 +85,6 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   pcre-dev \
   zlib-dev \
   linux-headers \
-  curl \
   gnupg \
   libxslt-dev \
   gd-dev \
@@ -128,8 +127,8 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && cd quiche \
   && git checkout -b $QUICHE_COMMIT \
   && cd .. \
-  && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz -o nginx.tar.gz \
-  && curl -fSL https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc  -o nginx.tar.gz.asc \
+  && wget -qO nginx.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
+  && wget -qO nginx.tar.gz.asc https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc \
   && export GNUPGHOME="$(mktemp -d)" \
   && found=''; \
   for server in \
