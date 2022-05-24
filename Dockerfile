@@ -7,8 +7,8 @@ FROM alpine:edge AS builder
 
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
-ENV NGINX_VERSION 1.16.1
-ENV PCRE_VERSION 8.44
+ENV NGINX_VERSION 1.21.6
+ENV PCRE_VERSION 8.45
 ENV ZLIB_VERSION 1.2.12
 
 RUN set -x; \
