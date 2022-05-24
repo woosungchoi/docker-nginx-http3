@@ -8,8 +8,8 @@ FROM alpine:edge AS builder
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
 ENV NGINX_VERSION 1.16.1
-ENV PCRE_VERSION 8.44
-ENV ZLIB_VERSION 1.2.11
+ENV PCRE_VERSION 8.45
+ENV ZLIB_VERSION 1.2.12
 
 RUN set -x; \
   CONFIG="\
@@ -111,7 +111,7 @@ RUN set -x; \
   && make \
   && make install \
   && cd .. \
-  && wget -qO- http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
+  && wget -qO- https://zlib.net/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
   && cd zlib-${ZLIB_VERSION} \
   && ./configure \
   && make \
