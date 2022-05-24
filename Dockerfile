@@ -8,7 +8,7 @@ FROM alpine:edge AS builder
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
 ENV NGINX_VERSION 1.16.1
-ENV PCRE_VERSION 8.45
+ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.12
 
 RUN set -x; \
@@ -61,7 +61,7 @@ RUN set -x; \
   --with-file-aio \
   --with-http_v2_module \
   --with-http_v3_module \
-  --with-openssl=/usr/src/quiche/deps/boringssl \
+  --with-openssl=/usr/src/quiche/quiche/deps/boringssl \
   --with-quiche=/usr/src/quiche \
   --add-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
