@@ -105,7 +105,7 @@ RUN set -x; \
   && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli \
   && cd ngx_brotli \
   && cd .. \
-  && wget -qO- https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.tar.gz | tar zxvf - \
+  && wget -qO- https://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz | tar zxvf - \
   && cd pcre-${PCRE_VERSION} \
   && ./configure \
   && make \
