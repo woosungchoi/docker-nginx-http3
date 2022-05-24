@@ -8,12 +8,10 @@ FROM alpine:edge AS builder
 LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
 
 ENV NGINX_VERSION 1.16.1
-ENV NGX_BROTLI_COMMIT 9aec15e2aa6feea2113119ba06460af70ab3ea62
 ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
-ENV QUICHE_COMMIT c885a71fd58c0c610e9e209f210b1951db81d6c5
 
-RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
+RUN set -x; \
   && CONFIG="\
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
@@ -106,7 +104,6 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && cd /usr/src \
   && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli \
   && cd ngx_brotli \
-  && git checkout -b $NGX_BROTLI_COMMIT \
   && cd .. \
   && wget -qO- https://ftp.pcre.org/pub/pcre/pcre-${PCRE_VERSION}.tar.gz | tar zxvf - \
   && cd pcre-${PCRE_VERSION} \
@@ -125,24 +122,8 @@ RUN set -x; GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
   && git clone --depth=1 --recursive https://github.com/AirisX/nginx_cookie_flag_module \
   && git clone --depth=1 --recursive https://github.com/cloudflare/quiche \
   && cd quiche \
-  && git checkout -b $QUICHE_COMMIT \
   && cd .. \
   && wget -qO nginx.tar.gz https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz \
-  && wget -qO nginx.tar.gz.asc https://nginx.org/download/nginx-$NGINX_VERSION.tar.gz.asc \
-  && export GNUPGHOME="$(mktemp -d)" \
-  && found=''; \
-  for server in \
-  ha.pool.sks-keyservers.net \
-  hkp://keyserver.ubuntu.com:80 \
-  hkp://p80.pool.sks-keyservers.net:80 \
-  pgp.mit.edu \
-  ; do \
-  echo "Fetching GPG key $GPG_KEYS from $server"; \
-  gpg --keyserver "$server" --keyserver-options timeout=10 --recv-keys "$GPG_KEYS" && found=yes && break; \
-  done; \
-  test -z "$found" && echo >&2 "error: failed to fetch GPG key $GPG_KEYS" && exit 1; \
-  gpg --batch --verify nginx.tar.gz.asc nginx.tar.gz \
-  && rm -rf "$GNUPGHOME" nginx.tar.gz.asc \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
   && rm nginx.tar.gz \
