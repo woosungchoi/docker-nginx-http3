@@ -12,7 +12,7 @@ ENV PCRE_VERSION 8.44
 ENV ZLIB_VERSION 1.2.11
 
 RUN set -x; \
-  && CONFIG="\
+  CONFIG="\
   --prefix=/etc/nginx \
   --sbin-path=/usr/sbin/nginx \
   --modules-path=/usr/lib/nginx/modules \
