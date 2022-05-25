@@ -1,11 +1,10 @@
 ##################################################
-# Nginx with Quiche (HTTP/3), Brotli, Headers More
-# modules.
+# Nginx with Brotli, Headers More modules.
 ##################################################
 
 FROM alpine:edge AS builder
 
-LABEL maintainer="Ranadeep Polavarapu <RanadeepPolavarapu@users.noreply.github.com>"
+LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
 ENV NGINX_VERSION 1.21.6
 ENV PCRE_VERSION 8.45
@@ -218,4 +217,4 @@ ARG VCS_REF
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
   org.label-schema.vcs-ref=$VCS_REF \
-  org.label-schema.vcs-url="https://github.com/RanadeepPolavarapu/docker-nginx-http3.git"
+  org.label-schema.vcs-url="https://github.com/woosungchoi/docker-nginx-brotli.git"
