@@ -1,4 +1,4 @@
-# docker-nginx-http3
+# docker-nginx-brotli
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/ranadeeppolavarapu/nginx-http3?color=brightgreen)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3)
 ![GitHub](https://img.shields.io/github/license/RanadeepPolavarapu/docker-nginx-http3)
@@ -8,13 +8,9 @@
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv7-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)  
 [![Arch](https://img.shields.io/badge/docker%20arch-linux%2Farm%2Fv6-blue)](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3/tags)
 
-Alpine Linux image with nginx `1.16.1` with HTTP/3 (QUIC), TLSv1.3, 0-RTT,
+Alpine Linux image with nginx `latest` with, TLSv1.3, 0-RTT,
 brotli, NJS, Cookie-Flag support. All built on the bleeding edge. Built on the
 edge, for the edge.
-
-HTTP/3 support provided from the smart people at
-[CloudFlare](https://cloudflare.com) with the
-[cloudflare/quiche](https://github.com/cloudflare/quiche) project.
 
 Images for this are available on
 [Docker Hub](https://hub.docker.com/r/ranadeeppolavarapu/nginx-http3) and
@@ -62,7 +58,6 @@ Contributions are welcome. Please feel free to contribute 😊.
 
 ## Features
 
-- HTTP/3 (QUIC) via CloudFlare's quiche
 - HTTP/2 (with Server Push)
 - HTTP/2
 - BoringSSL (Google's flavor of OpenSSL)
@@ -76,42 +71,6 @@ Contributions are welcome. Please feel free to contribute 😊.
   enabled
 - zlib latest
 - Alpine Linux (total size of **10 MB** compressed)
-
-## Future Additions
-
-Possible additions in the future pending IETF spec approvals.
-
-- [Facebook's zstd over the web](https://tools.ietf.org/html/rfc8478)
-
-## HTTP/3 ENABLED!
-
-Using Chrome Canary with the following CLI flags:
-
-```bash
---flag-switches-begin --enable-quic --quic-version=h3-29 --enable-features=EnableTLS13EarlyData --flag-switches-end
-```
-
-Run on Mac OS (**darwin**):
-
-```bash
-"/Applications/Google Chrome Canary.app Contents/MacOS/Google Chrome Canary" \
-  --flag-switches-begin \
-  --enable-quic \
-  --quic-version=h3-29 \
-  --enable-features=EnableTLS13EarlyData \
-  --flag-switches-end
-```
-
-Windows:
-
-![Windows Chrome Canary](https://user-images.githubusercontent.com/13495525/68124347-21b9d380-ff4a-11e9-9963-e1102762c466.JPG)
-
-### HTTP/3 (QUIC) Proof
-
-Since HTTP/3 is experimental, we have to be sensible with it. Therefore, below
-is HTTP/3 in production on one of my web apps 🙃.
-
-![h3](https://user-images.githubusercontent.com/7084995/67162952-831d5800-f337-11e9-9297-05241a693cc4.png)
 
 ## HTTP/2 with Server Push
 
