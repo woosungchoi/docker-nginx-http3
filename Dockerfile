@@ -6,7 +6,7 @@ FROM alpine:edge AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
-ENV NGINX_VERSION 1.21.6
+ENV NGINX_VERSION 1.22.0
 ENV PCRE_VERSION 8.45
 ENV ZLIB_VERSION 1.2.12
 
