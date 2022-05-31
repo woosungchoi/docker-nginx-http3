@@ -27,7 +27,7 @@ RUN set -x; \
   --http-scgi-temp-path=/var/cache/nginx/scgi_temp \
   --user=nginx \
   --group=nginx \
-  --with-pcre=/usr/src/pcre-${PCRE_VERSION} \
+  --with-pcre=/usr/src/pcre2-${PCRE_VERSION} \
   --with-pcre-jit \
   --with-zlib=/usr/src/zlib-${ZLIB_VERSION} \
   --with-http_ssl_module \
