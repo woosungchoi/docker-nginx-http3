@@ -7,7 +7,7 @@ FROM alpine:edge AS builder
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
 ENV NGINX_VERSION 1.22.0
-ENV PCRE_VERSION 8.45
+ENV PCRE_VERSION 10.37
 ENV ZLIB_VERSION 1.2.12
 
 RUN set -x; \
@@ -101,7 +101,7 @@ RUN set -x; \
   && git clone --depth=1 --recursive --shallow-submodules https://github.com/google/ngx_brotli \
   && cd ngx_brotli \
   && cd .. \
-  && wget -qO- https://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz | tar zxvf - \
+  && wget -qO- https://sourceforge.net/projects/pcre/files/pcre2/${PCRE_VERSION}/pcre2-${PCRE_VERSION}.tar.gz | tar zxvf - \
   && cd pcre-${PCRE_VERSION} \
   && ./configure \
   && make \

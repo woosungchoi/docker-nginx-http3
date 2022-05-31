@@ -15,7 +15,7 @@ Best practice example Nginx configs are available in this repo. See [_nginx.conf
 Example:
 
 ```Dockerfile
-# Base Nginx HTTP/3 Image
+# Base Nginx HTTP/2 Image
 FROM woosungchoi/docker-nginx-brotli:latest
 
 # Copy your certs.
@@ -26,9 +26,6 @@ COPY localhost.pem /etc/ssl/
 COPY nginx.conf /etc/nginx/
 COPY h3.nginx.conf /etc/nginx/conf.d/
 ```
-
-H3 runs over UDP so, you will need to port map both TCP. Ex:
-`docker run -p 80:80 -p 443:443/tcp ...`
 
 **NOTE**: Please note that you need a valid [CA](https://en.wikipedia.org/wiki/Certificate_authority) signed certificate for the client to upgrade you to HTTP/2. [Let's Encrypt](https://letsencrypt.org/) is a option for getting a free valid CA signed certificate.
 
@@ -41,8 +38,7 @@ H3 runs over UDP so, you will need to port map both TCP. Ex:
 - [headers-more-nginx-module](https://github.com/openresty/headers-more-nginx-module)
 - [NJS](https://www.nginx.com/blog/introduction-nginscript/)
 - [nginx_cookie_flag_module](https://www.nginx.com/products/nginx/modules/cookie-flag/)
-- PCRE latest with
-  [JIT compilation](http://nginx.org/en/docs/ngx_core_module.html#pcre_jit) enabled
+- PCRE latest with [JIT compilation](http://nginx.org/en/docs/ngx_core_module.html#pcre_jit) enabled
 - zlib latest
 - Alpine Linux (total size of **10 MB** compressed)
 
