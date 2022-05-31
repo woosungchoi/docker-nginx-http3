@@ -102,7 +102,7 @@ RUN set -x; \
   && cd ngx_brotli \
   && cd .. \
   && wget -qO- https://sourceforge.net/projects/pcre/files/pcre2/${PCRE_VERSION}/pcre2-${PCRE_VERSION}.tar.gz | tar zxvf - \
-  && cd pcre-${PCRE_VERSION} \
+  && cd pcre2-${PCRE_VERSION} \
   && ./configure \
   && make \
   && make install \
