@@ -67,8 +67,7 @@ RUN set -x; \
   " \
   && addgroup -S nginx \
   && adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx \
-  && apk update \
-  && apk upgrade \
+  && apk upgrade --no-cache \
   && apk add --no-cache ca-certificates \
   && update-ca-certificates \
   && apk add --no-cache --virtual .build-deps \
@@ -156,7 +155,7 @@ RUN set -x; \
   # the rest away. To do this, we need to install `gettext`
   # then move `envsubst` out of the way so `gettext` can
   # be deleted completely, then move `envsubst` back.
-  && apk add --no-cache --virtual .gettext gettext libintl gettext-libs \
+  && apk add --no-cache --virtual .gettext gettext \
   && mv /usr/bin/envsubst /tmp/ \
   \
   && runDeps="$( \
@@ -173,7 +172,7 @@ RUN set -x; \
   && mv /tmp/envsubst /usr/local/bin/
 
 # Create self-signed certificate
-RUN apk add openssl \
+RUN apk add --no-cache openssl \
   && openssl req -x509 -newkey rsa:4096 -nodes -keyout /etc/ssl/private/localhost.key -out /etc/ssl/localhost.pem -days 365 -sha256 -subj '/CN=localhost'
 
 FROM alpine:latest
