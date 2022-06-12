@@ -2,7 +2,7 @@
 # Nginx with Brotli, Headers More modules.
 ##################################################
 
-FROM alpine:edge AS builder
+FROM alpine:latest AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
@@ -150,16 +150,16 @@ RUN set -x; \
   && rm -rf /usr/src/headers-more-nginx-module \
   && rm -rf /usr/src/njs \
   && rm -rf /usr/src/nginx_cookie_flag_module \
-  #\
+  \
   # Bring in gettext so we can get `envsubst`, then throw
   # the rest away. To do this, we need to install `gettext`
   # then move `envsubst` out of the way so `gettext` can
   # be deleted completely, then move `envsubst` back.
-  #&& apk add --no-cache --virtual .gettext gettext \
-  #&& mv /usr/bin/envsubst /tmp/ \
-  #\
+  && apk add --no-cache --virtual .gettext gettext \
+  && mv /usr/bin/envsubst /tmp/ \
+  \
   && runDeps="$( \
-  scanelf --needed --nobanner /usr/sbin/nginx /usr/lib/nginx/modules/*.so \
+  scanelf --needed --nobanner /usr/sbin/nginx /usr/lib/nginx/modules/*.so /tmp/envsubst \
   | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
   | sort -u \
   | xargs -r apk info --installed \
@@ -167,9 +167,9 @@ RUN set -x; \
   )" \
   && apk add --no-cache --virtual .nginx-rundeps $runDeps \
   && apk del .build-deps \
-  && apk del .brotli-build-deps
-  #&& apk del .gettext \
-  #&& mv /tmp/envsubst /usr/local/bin/
+  && apk del .brotli-build-deps \
+  && apk del .gettext \
+  && mv /tmp/envsubst /usr/local/bin/
 
 # Create self-signed certificate
 RUN apk add --no-cache openssl \
@@ -181,7 +181,7 @@ COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx-debug /usr/sbin/
 COPY --from=builder /usr/lib/nginx /usr/lib/
 COPY --from=builder /usr/share/nginx/html/* /usr/share/nginx/html/
 COPY --from=builder /etc/nginx/* /etc/nginx/
-#COPY --from=builder /usr/local/bin/envsubst /usr/local/bin/
+COPY --from=builder /usr/local/bin/envsubst /usr/local/bin/
 COPY --from=builder /etc/ssl/private/localhost.key /etc/ssl/private/
 COPY --from=builder /etc/ssl/localhost.pem /etc/ssl/
 
