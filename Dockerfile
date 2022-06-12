@@ -167,7 +167,7 @@ RUN set -x; \
   )" \
   && apk add --no-cache --virtual .nginx-rundeps $runDeps \
   && apk del .build-deps \
-  && apk del .brotli-build-deps \
+  && apk del .brotli-build-deps
   #&& apk del .gettext \
   #&& mv /tmp/envsubst /usr/local/bin/
 
