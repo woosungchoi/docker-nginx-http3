@@ -156,7 +156,7 @@ RUN set -x; \
   # the rest away. To do this, we need to install `gettext`
   # then move `envsubst` out of the way so `gettext` can
   # be deleted completely, then move `envsubst` back.
-  && apk add --no-cache --virtual .gettext gettext \
+  && apk add --no-cache --virtual .gettext gettext libintl gettext-libs \
   && mv /usr/bin/envsubst /tmp/ \
   \
   && runDeps="$( \
