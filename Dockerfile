@@ -181,7 +181,7 @@ COPY --from=builder /usr/sbin/nginx /usr/sbin/nginx-debug /usr/sbin/
 COPY --from=builder /usr/lib/nginx /usr/lib/
 COPY --from=builder /usr/share/nginx/html/* /usr/share/nginx/html/
 COPY --from=builder /etc/nginx/* /etc/nginx/
-COPY --from=builder /usr/local/bin/envsubst /usr/local/bin/
+#COPY --from=builder /usr/local/bin/envsubst /usr/local/bin/
 COPY --from=builder /etc/ssl/private/localhost.key /etc/ssl/private/
 COPY --from=builder /etc/ssl/localhost.pem /etc/ssl/
 
