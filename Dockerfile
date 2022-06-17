@@ -51,8 +51,8 @@ RUN set -x; \
   --with-stream_quic_module \
   --with-openssl=/usr/src/boringssl \
   --with-cc-opt=-I/usr/src/boringssl/include \
-  --with-ld-opt="-L/usr/src/boringssl/build/ssl \
-                 -L/usr/src/boringssl/build/crypto" \
+  --with-ld-opt=-L/usr/src/boringssl/build/ssl \
+  --with-ld-opt=-L/usr/src/boringssl/build/crypto \
   --with-threads \
   --with-stream \
   --with-stream_ssl_module \
