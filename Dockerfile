@@ -51,8 +51,8 @@ RUN set -x; \
   --with-stream_quic_module \
   --with-openssl=/usr/src/boringssl \
   --with-cc-opt=-I/usr/src/boringssl/include \
-  --with-ld-opt=-L/usr/src/boringssl/build/ssl \
-  --with-ld-opt=-L/usr/src/boringssl/build/crypto \
+  --with-ld-opt="-L/usr/src/boringssl/build/ssl \
+                 -L/usr/src/boringssl/build/crypto" \
   --with-threads \
   --with-stream \
   --with-stream_ssl_module \
@@ -121,7 +121,7 @@ RUN set -x; \
   && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module \
   && git clone --depth=1 --recursive https://github.com/nginx/njs \
   && git clone --depth=1 --recursive https://github.com/AirisX/nginx_cookie_flag_module \
-  && (git clone --depth=1 https://boringssl.googlesource.com/boringssl /usr/src/boringssl \
+  && git clone --depth=1 https://boringssl.googlesource.com/boringssl /usr/src/boringssl \
 	&& mkdir -p /usr/src/boringssl/build \
 	&& cmake -B/usr/src/boringssl/build -H/usr/src/boringssl -DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	&& make -C/usr/src/boringssl/build -j$(getconf _NPROCESSORS_ONLN) \
@@ -129,8 +129,8 @@ RUN set -x; \
     && cd "/usr/src/boringssl/.openssl" \
     && ln -s ../include \
     && cd "/usr/src/boringssl" \
-    && cp "build/crypto/libcrypto.a" "build/ssl/libssl.a" ".openssl/lib" \) \
-  \
+    && cp "build/crypto/libcrypto.a" "build/ssl/libssl.a" ".openssl/lib" \
+  && cd .. \
   && wget -qO nginx.tar.gz https://hg.nginx.org/nginx-quic/archive/quic.tar.gz \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
