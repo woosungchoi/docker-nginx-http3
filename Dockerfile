@@ -231,6 +231,8 @@ RUN \
 # Recommended nginx configuration. Please copy the config you wish to use.
 # COPY nginx.conf /etc/nginx/
 # COPY h3.nginx.conf /etc/nginx/conf.d/
+COPY index.html /usr/share/nginx/html/
+COPY 50x.html /usr/share/nginx/html/
 
 STOPSIGNAL SIGTERM
 
