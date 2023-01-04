@@ -8,7 +8,7 @@ LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
 ENV NGINX_VERSION quic-quic
 ENV PCRE_VERSION 10.40
-ENV ZLIB_VERSION 1.2.12
+ENV ZLIB_VERSION 1.2.13
 
 RUN set -x; \
   CONFIG="\
