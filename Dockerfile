@@ -6,8 +6,8 @@ FROM alpine:latest AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
-ENV NGINX_VERSION 1.22.1
-ENV PCRE_VERSION 10.40
+ENV NGINX_VERSION 1.23.3
+ENV PCRE_VERSION 10.42
 ENV ZLIB_VERSION 1.2.13
 
 RUN set -x; \
