@@ -59,6 +59,7 @@ RUN set -x; \
   --with-compat \
   --with-file-aio \
   --with-http_v2_module \
+  --with-http_v3_module \
   --add-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
   --add-module=/usr/src/nginx_cookie_flag_module \
