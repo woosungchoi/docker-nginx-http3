@@ -48,7 +48,6 @@ RUN set -x; \
   --with-http_geoip_module=dynamic \
   --with-http_perl_module=dynamic \
   --with-http_v3_module \
-  --with-stream_quic_module \
   --with-openssl=/usr/src/boringssl \
   --with-cc-opt=-I/usr/src/boringssl/include \
   --with-ld-opt=-L/usr/src/boringssl/build/ssl \
