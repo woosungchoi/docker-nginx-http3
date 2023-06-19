@@ -6,7 +6,7 @@ FROM alpine:latest AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
-ENV NGINX_VERSION quic-quic
+ENV NGINX_VERSION 1.25.1
 ENV PCRE_VERSION 10.40
 ENV ZLIB_VERSION 1.2.13
 
@@ -131,7 +131,7 @@ RUN set -x; \
     && cd "/usr/src/boringssl" \
     && cp "build/crypto/libcrypto.a" "build/ssl/libssl.a" ".openssl/lib" \
   && cd .. \
-  && wget -qO nginx.tar.gz https://hg.nginx.org/nginx-quic/archive/quic.tar.gz \
+  && wget -qO nginx.tar.gz https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
   && rm nginx.tar.gz \
