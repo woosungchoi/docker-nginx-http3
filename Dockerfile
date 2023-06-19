@@ -47,11 +47,10 @@ RUN set -x; \
   --with-http_image_filter_module=dynamic \
   --with-http_geoip_module=dynamic \
   --with-http_perl_module=dynamic \
+  --with-http_v2_module \
   --with-http_v3_module \
-  --with-openssl=/usr/src/boringssl \
-  --with-cc-opt=-I/usr/src/boringssl/include \
-  --with-ld-opt=-L/usr/src/boringssl/build/ssl \
-  --with-ld-opt=-L/usr/src/boringssl/build/crypto \
+  --with-cc-opt=-I/usr/src/boringssl/.openssl/include \
+  --with-ld-opt=-L/usr/src/boringssl/.openssl/lib \
   --with-threads \
   --with-stream \
   --with-stream_ssl_module \
@@ -63,7 +62,6 @@ RUN set -x; \
   --with-mail_ssl_module \
   --with-compat \
   --with-file-aio \
-  --with-http_v2_module \
   --add-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
   --add-module=/usr/src/njs/nginx \
@@ -120,16 +118,14 @@ RUN set -x; \
   && git clone --depth=1 --recursive https://github.com/openresty/headers-more-nginx-module \
   && git clone --depth=1 --recursive https://github.com/nginx/njs \
   && git clone --depth=1 --recursive https://github.com/AirisX/nginx_cookie_flag_module \
-  && git clone --depth=1 https://boringssl.googlesource.com/boringssl /usr/src/boringssl \
-	&& mkdir -p /usr/src/boringssl/build \
-	&& cmake -B/usr/src/boringssl/build -H/usr/src/boringssl -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-	&& make -C/usr/src/boringssl/build -j$(getconf _NPROCESSORS_ONLN) \
-    && mkdir -p "/usr/src/boringssl/.openssl/lib" \
-    && cd "/usr/src/boringssl/.openssl" \
-    && ln -s ../include \
-    && cd "/usr/src/boringssl" \
-    && cp "build/crypto/libcrypto.a" "build/ssl/libssl.a" ".openssl/lib" \
-  && cd .. \
+	&& (git clone --depth=1 https://boringssl.googlesource.com/boringssl /usr/src/boringssl \
+		&& mkdir -p /usr/src/boringssl/build /usr/src/boringssl/.openssl/lib /usr/src/boringssl/.openssl/include \
+		&& ln -sf /usr/src/boringssl/include/openssl /usr/src/boringssl/.openssl/include/openssl \
+		&& touch /usr/src/boringssl/.openssl/include/openssl/ssl.h \
+		&& cmake -B/usr/src/boringssl/build -H/usr/src/boringssl -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+		&& make -C/usr/src/boringssl/build -j$(getconf _NPROCESSORS_ONLN) \
+		&& cp /usr/src/boringssl/build/crypto/libcrypto.a /usr/src/boringssl/build/ssl/libssl.a /usr/src/boringssl/.openssl/lib) \
+	\
   && wget -qO nginx.tar.gz https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz \
   && mkdir -p /usr/src \
   && tar -zxC /usr/src -f nginx.tar.gz \
@@ -137,9 +133,6 @@ RUN set -x; \
   && cd /usr/src/nginx-$NGINX_VERSION \
   && ./configure $CONFIG --with-debug --build="pcre-${PCRE_VERSION} zlib-${ZLIB_VERSION} ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
   \
-  # Prevent build-error 127 which seems to be caused by the ssl.h file missing:
-  && mkdir -p /usr/src/boringssl/.openssl/include/openssl/ \
-  && touch /usr/src/boringssl/.openssl/include/openssl/ssl.h \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && mv objs/nginx objs/nginx-debug \
   && mv objs/ngx_http_xslt_filter_module.so objs/ngx_http_xslt_filter_module-debug.so \
@@ -147,11 +140,8 @@ RUN set -x; \
   && mv objs/ngx_http_geoip_module.so objs/ngx_http_geoip_module-debug.so \
   && mv objs/ngx_http_perl_module.so objs/ngx_http_perl_module-debug.so \
   && mv objs/ngx_stream_geoip_module.so objs/ngx_stream_geoip_module-debug.so \
-  && ./auto/configure $CONFIG --build="pcre-${PCRE_VERSION} zlib-${ZLIB_VERSION} ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
+  && ./configure $CONFIG --build="pcre-${PCRE_VERSION} zlib-${ZLIB_VERSION} ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-$(git --git-dir=/usr/src/headers-more-nginx-module/.git rev-parse --short HEAD) njs-$(git --git-dir=/usr/src/njs/.git rev-parse --short HEAD) nginx_cookie_flag_module-$(git --git-dir=/usr/src/nginx_cookie_flag_module/.git rev-parse --short HEAD)" \
   \
-  # Prevent build-error 127 which seems to be caused by the ssl.h file missing:
-  && mkdir -p /usr/src/boringssl/.openssl/include/openssl/ \
-  && touch /usr/src/boringssl/.openssl/include/openssl/ssl.h \
   && make -j$(getconf _NPROCESSORS_ONLN) \
   && make install \
   && rm -rf /etc/nginx/html/ \
