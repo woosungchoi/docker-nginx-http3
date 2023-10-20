@@ -88,7 +88,7 @@ RUN set -x; \
   libtool \
   automake \
   git \
-  gcc-aarch64-none-elf \
+  musl-dev \
   g++ \
   cmake \
   go \
