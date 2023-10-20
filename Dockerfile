@@ -6,9 +6,9 @@ FROM alpine:latest AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
-ENV NGINX_VERSION 1.25.1
+ENV NGINX_VERSION 1.25.2
 ENV PCRE_VERSION 10.42
-ENV ZLIB_VERSION 1.3
+ENV ZLIB_VERSION 1.2.13
 
 RUN set -x; \
   CONFIG="\
@@ -106,7 +106,7 @@ RUN set -x; \
   && make \
   && make install \
   && cd .. \
-  && wget -qO- https://zlib.net/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
+  && wget -qO- https://github.com/madler/zlib/releases/download/v${ZLIB_VERSION}/zlib-${ZLIB_VERSION}.tar.gz | tar zxvf - \
   && cd zlib-${ZLIB_VERSION} \
   && ./configure \
   && make \
