@@ -90,6 +90,7 @@ RUN set -x; \
   git \
   g++ \
   cmake \
+  libc6-dev \
   go \
   perl \
   rust \
