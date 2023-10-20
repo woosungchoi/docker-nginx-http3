@@ -83,7 +83,7 @@ RUN set -x; \
   gd-dev \
   geoip-dev \
   perl-dev \
-  && apk add --no-cache --virtual \
+  && apk add --no-cache --virtual .brotli-build-deps \
   autoconf \
   libtool \
   automake \
