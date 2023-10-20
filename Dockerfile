@@ -94,6 +94,9 @@ RUN set -x; \
   build-base \
   libacl \
   libbz2 \
+  libpcre3-dev \
+  libssl-dev \
+  zlib1g-dev \
   go \
   perl \
   rust \
