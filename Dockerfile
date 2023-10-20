@@ -91,6 +91,9 @@ RUN set -x; \
   musl-dev \
   g++ \
   cmake \
+  build-base \
+  libacl \
+  libbz2 \
   go \
   perl \
   rust \
