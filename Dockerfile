@@ -6,7 +6,7 @@ FROM alpine:latest AS builder
 
 LABEL maintainer="Woosungchoi <https://github.com/woosungchoi>"
 
-ENV NGINX_VERSION 1.25.2
+ENV NGINX_VERSION 1.25.3
 ENV PCRE_VERSION 10.42
 ENV ZLIB_VERSION 1.3
 
@@ -60,7 +60,6 @@ RUN set -x; \
   --with-file-aio \
   --with-http_v2_module \
   --with-http_v3_module \
-  --with-compat --add-dynamic-module=/usr/src/ngx_brotli \
   --add-module=/usr/src/headers-more-nginx-module \
   --add-module=/usr/src/nginx_cookie_flag_module \
   --with-cc-opt=-Wno-error \
@@ -83,7 +82,7 @@ RUN set -x; \
   gd-dev \
   geoip-dev \
   perl-dev \
-  && apk add --no-cache --virtual .brotli-build-deps \
+  && apk add --no-cache --virtual \
   autoconf \
   libtool \
   automake \
@@ -104,12 +103,6 @@ RUN set -x; \
   patch \
   && mkdir -p /usr/src \
   && cd /usr/src \
-  && git clone --recurse-submodules -j8 https://github.com/google/ngx_brotli \
-  && cd ngx_brotli/deps/brotli \
-  && mkdir out && cd out \
-  && cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DCMAKE_C_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_CXX_FLAGS="-Ofast -m64 -march=native -mtune=native -flto -funroll-loops -ffunction-sections -fdata-sections -Wl,--gc-sections" -DCMAKE_INSTALL_PREFIX=./installed .. \
-  && cmake --build . --config Release --target brotlienc \
-  && cd ../../../.. \
   && wget -qO- https://github.com/PCRE2Project/pcre2/releases/download/pcre2-${PCRE_VERSION}/pcre2-${PCRE_VERSION}.tar.gz | tar zxvf - \
   && cd pcre2-${PCRE_VERSION} \
   && ./configure \
@@ -155,7 +148,6 @@ RUN set -x; \
   && strip /usr/sbin/nginx* \
   && strip /usr/lib/nginx/modules/*.so \
   && rm -rf /usr/src/nginx-$NGINX_VERSION \
-  && rm -rf /usr/src/ngx_brotli \
   && rm -rf /usr/src/headers-more-nginx-module \
   && rm -rf /usr/src/nginx_cookie_flag_module \
   \
@@ -175,7 +167,6 @@ RUN set -x; \
   )" \
   && apk add --no-cache --virtual .nginx-rundeps $runDeps \
   && apk del .build-deps \
-  && apk del .brotli-build-deps \
   && apk del .gettext \
   && mv /tmp/envsubst /usr/local/bin/
 
